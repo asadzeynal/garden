@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Garden</string>
+    <string name="select_action">Select Action</string>
+    <string name="profile">Profile</string>
+    <string name="message">Message</string>
+    <string name="login">Login</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

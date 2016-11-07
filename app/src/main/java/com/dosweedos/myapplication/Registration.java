@@ -1,6 +1,7 @@
 package com.dosweedos.myapplication;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,11 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_registration);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() != null){
+            finish();
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        }
 
         progressDialog = new ProgressDialog(this);
 
@@ -70,10 +76,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Registration.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }
                         else {
                             Toast.makeText(Registration.this, "Could not register, please try again", Toast.LENGTH_SHORT).show();
                         }
+                        progressDialog.dismiss();
                     }
                 });
     }
@@ -84,7 +93,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             registerUser();
         }
         if(view == textViewSignin){
-            // something
+            startActivity(new Intent(this, Login.class));
         }
     }
 }

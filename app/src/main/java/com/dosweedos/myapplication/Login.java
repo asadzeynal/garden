@@ -7,6 +7,7 @@ package com.dosweedos.myapplication;
         import android.os.Bundle;
 
         import android.support.annotation.NonNull;
+        import android.support.v7.app.AppCompatActivity;
         import android.text.TextUtils;
         import android.view.Menu;
         import android.view.MenuItem;
@@ -28,7 +29,7 @@ package com.dosweedos.myapplication;
         import java.io.FileInputStream;
         import java.io.FileOutputStream;
 
-public class Login extends Activity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
     private Button buttonLogin,buttonCancel,buttonRegister;
     private EditText editTextUsername,editTextPassword;
     TextView tx1;
@@ -42,6 +43,8 @@ public class Login extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         buttonLogin=(Button)findViewById(R.id.login);
         buttonCancel=(Button)findViewById(R.id.cancel);
         buttonRegister=(Button)findViewById(R.id.register);
@@ -51,7 +54,6 @@ public class Login extends Activity implements View.OnClickListener {
 //        tx1.setVisibility(View.GONE);
 
         progressDialog = new ProgressDialog(this);
-        firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
             finish();
@@ -76,14 +78,13 @@ public class Login extends Activity implements View.OnClickListener {
         progressDialog.setMessage("Signing in, please wait");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
-
                 if(task.isSuccessful()){
-                finish();
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 }
             }
         });

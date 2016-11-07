@@ -10,26 +10,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dosweedos.myapplication.ProfileActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
-
-        <TextView
-            android:text="Large Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/textViewUserEmail" />
-
-        <Button
-            android:text="Logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonLogout"
-            android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
 </RelativeLayout>

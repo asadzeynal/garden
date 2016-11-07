@@ -47,8 +47,8 @@ public class Login extends Activity implements View.OnClickListener {
         buttonRegister=(Button)findViewById(R.id.register);
         editTextUsername=(EditText)findViewById(R.id.username);
         editTextPassword=(EditText)findViewById(R.id.password);
-        tx1=(TextView)findViewById(R.id.textView3);
-        tx1.setVisibility(View.GONE);
+//        tx1=(TextView)findViewById(R.id.textView3);
+//        tx1.setVisibility(View.GONE);
 
         progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -82,8 +82,8 @@ public class Login extends Activity implements View.OnClickListener {
                 progressDialog.dismiss();
 
                 if(task.isSuccessful()){
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                finish();
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 }
             }
         });

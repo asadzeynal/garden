@@ -1,5 +1,4 @@
 package com.dosweedos.myapplication;
-
         import android.app.Activity;
         import android.app.ProgressDialog;
         import android.content.Intent;
@@ -28,7 +27,6 @@ package com.dosweedos.myapplication;
 
         import java.io.FileInputStream;
         import java.io.FileOutputStream;
-
 public class Login extends AppCompatActivity implements View.OnClickListener {
     private Button buttonLogin,buttonCancel,buttonRegister;
     private EditText editTextUsername,editTextPassword;
@@ -85,6 +83,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if(task.isSuccessful()){
                     finish();
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                }else{
+
                 }
             }
         });

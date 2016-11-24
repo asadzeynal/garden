@@ -41,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private static final int GALLERY_REQUEST = 1;
 
     private StorageReference mStorageImage;
+    private FirebaseDatabase database;
     private DatabaseReference mDatabaseUsers;
     private FirebaseAuth mAuth;
     @Override
@@ -49,8 +50,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
 
         mAuth = FirebaseAuth.getInstance();
-
-        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        database = FirebaseDatabase.getInstance();
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("users");
 
         mStorageImage = FirebaseStorage.getInstance().getReference().child("Profile_images");
 
@@ -63,6 +64,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 startSetupAccount();
+                finish();
+                startActivity(new Intent(getApplicationContext(), FeedActivity.class));
             }
         });
 
@@ -88,14 +91,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if(!TextUtils.isEmpty(name) && mImageUri!= null){
 
             StorageReference filepath = mStorageImage.child(mImageUri.getLastPathSegment());
-
             filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     String downloadUri = taskSnapshot.getDownloadUrl().toString();
-
-                    mDatabaseUsers.child(user_id).child("name").setValue(name);
-                    mDatabaseUsers.child(user_id).child("image").setValue(downloadUri);
+                    UserBean user = new UserBean(name,downloadUri);
+//                    mDatabaseUsers.child("users").child(user_id).child("name").setValue(name);
+//                    mDatabaseUsers.child(user_id).child("name").setValue(name);
+//                    mDatabaseUsers.child("users").child(user_id).child("image").setValue(downloadUri);
+                      mDatabaseUsers.child(user_id).setValue(user);
                 }
             });
 
@@ -158,6 +162,5 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(getApplicationContext(), Login.class));
             firebaseAuth.signOut();
         }
-
     }
 }

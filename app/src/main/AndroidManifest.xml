@@ -25,7 +25,10 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".PostActivity" />
         <activity android:name=".News" />
-        <activity android:name=".FeedActivity"></activity>
+        <activity android:name=".FeedActivity" />
+        <activity
+            android:name=".MainFeedActivity"
+            android:label="@string/title_activity_main_feed"></activity>
     </application>
 
 </manifest>

@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         mSubmitBtn = (Button) findViewById(R.id.setupSubmitBtn);
         if(!mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).child("name").equals(null)){
             finish();
-            startActivity(new Intent(getApplicationContext(), FeedActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainFeedActivity.class));
         }
 
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {

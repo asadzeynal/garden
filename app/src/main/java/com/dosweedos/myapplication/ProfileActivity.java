@@ -59,6 +59,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         mSetupImageBtn = (ImageButton) findViewById(R.id.setupImageBtn);
         mNameField = (EditText) findViewById(R.id.setupNameField);
         mSubmitBtn = (Button) findViewById(R.id.setupSubmitBtn);
+        if(!mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).child("name").equals(null)){
+            finish();
+            startActivity(new Intent(getApplicationContext(), FeedActivity.class));
+        }
 
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
